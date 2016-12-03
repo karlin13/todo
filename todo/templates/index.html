@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+    <title>TODO</title>
+</head>
+<body>
+
+    <form method=post action={{ request.url }}>
+        {{ form.csrf_token }}
+        {{ form.todo.label }} {{ form.todo(size=20) }}
+    </form>
+    <div class="ui tall stacked segment">
+        {% for todo in todos %}
+            <div class = "ui segment">
+                {% if todo.is_complete == True %}
+                    <form method="GET" action="/todoundone">
+                        <button class="ui icon active button" name="todostate" value={{ todo.id }}><i class="checkmark icon"></i></button>
+                    </form>
+                {% else %}
+                    <form method="GET" action="/tododone">
+                        <button class="ui icon button" name="todostate" value={{ todo.id }}><i class="checkmark icon"></i></button>
+                    </form>
+                {% endif %}
+                {{ todo.todo }}
+                <form method="GET" action="/delete">
+                    <button name="remove" value={{ todo.id }} class = "ui icon button"><i class="remove icon"></i></button>
+                </form>
+            </div>
+        {% endfor %}
+        <div class = "ui horizontal divider">
+        filter
+        </div>
+        <div id = "filter">
+            {{ todos_len }} items left
+            <div class = "ui buttons">
+                <form method="GET" action="/">
+                    <button class = "ui button">All</button>
+                </form>
+                <form method="GET" action="/active">
+                    <button class = "ui button">Active</button>
+                </form>
+                <form method="GET" action="/complete">
+                    <button class = "ui button">Completed</button>
+                </form>
+                  <form method="GET" action="/clearall">
+                    <button class = "ui button">Clear All</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
