@@ -1,12 +1,12 @@
-from sqlalchemy import Column, Integer, String, Boolean
-from database import Base
+from database import db
 
-class todos(Base):
+
+class Todos(db.Model):
     __tablename__ = 'todos'
-    id = Column(Integer, primary_key=True)
-    todo = Column(String(100), unique=False)
-    is_complete = Column(Boolean)
+    id = db.Column(db.Integer, primary_key=True)
+    todo = db.Column(db.String(100), unique=False) #TODO: test if 'unique=False' is default
+    todo_complete = db.Column(db.Boolean)
 
-    def __init__(self, todo=None, is_complete=None):
+    def __init__(self, todo, todo_complete):
         self.todo = todo
-        self.is_complete = is_complete
+        self.todo_complete = todo_complete
