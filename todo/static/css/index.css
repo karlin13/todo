@@ -1,0 +1,19 @@
+#container{
+    margin: 5% 30% 0 30%;
+}
+#remove_todo{
+    position: absolute;
+    right: 0;
+    visibility: hidden;
+    background: transparent;
+    color: #0086B3;
+}
+
+.todo_complete{
+    text-decoration:line-through;
+    color: #E0E0E0;
+}
+.todo_active{
+    text-decoration: solid;
+}
+
