@@ -1,4 +1,20 @@
 
+//좀 더 명료한 함수이름으로 바꾸기
+// 모든 체크박스를 master(?체크박스임)상태와 같게 만든다
+function syncAllCheckbox(master){
+    var masterChecked = master.checked;
+
+    var todoCheckboxes = document.getElementsByName('todo_checkbox');
+
+    for(var idx=0;idx<todoCheckboxes.length;idx++){
+
+        if(todoCheckboxes[idx].checked != masterChecked) {
+            todoCheckboxes[idx].click();
+        }
+
+    }
+}
+
 function sendPost(cur_url, req_url, todo_id){
     var xhr = new XMLHttpRequest();
 
