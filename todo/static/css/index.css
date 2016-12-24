@@ -2,8 +2,6 @@
     margin: 5% 30% 0 30%;
 }
 #remove_todo{
-    position: absolute;
-    right: 0;
     visibility: hidden;
     background: transparent;
     color: #0086B3;
