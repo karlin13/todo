@@ -1,6 +1,19 @@
+body{
+    background-image: url('../image/bonobono.jpg');
+}
+
 #container{
     margin: 5% 30% 0 30%;
 }
+
+#todo_segments{
+    background: linear-gradient(red,orange,yellow,green,blue,navy,purple);
+}
+
+#todo_segment{
+    font-family: '궁서체', sans-serif;
+}
+
 #remove_todo{
     visibility: hidden;
     background: transparent;
