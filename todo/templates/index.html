@@ -15,19 +15,40 @@
 
         <div id="todo_segments" class="ui stacked segment">
 
-            <form method="POST" action="{{ request.url }}" class="ui form">
-                {{ form.input(size=100, placeholder="What needs to be done?") }}
-            </form>
+            <div class="ui grid">
 
+
+                {% if cnt_active_todo + cnt_complete_todo != 0 %}
+                    <div class="two wide column">
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox"
+                                   {% if cnt_active_todo == 0 %}
+                                    checked
+                                   {% endif %}
+                                   onclick="syncAllCheckbox(this)">
+                            <label></label>
+                        </div>
+                    </div>
+                {% endif %}
+
+
+                <div class="twelve wide column">
+                    <form method="POST" action="{{ request.url }}" class="ui form">
+                        {{ form.input(size=100, placeholder="What needs to be done?") }}
+                    </form>
+                </div>
+
+            </div>
             <div class="ui section divider"></div>
 
             {% for todo in todos %}
 
                 <div id="todo_segment" onmouseover="remove_todo_visible(this)" onmouseout="remove_todo_invisible(this)">
 
-                    <div class="ui checkbox">
+                    <div class="ui toggle checkbox">
 
                         <input type="checkbox"
+                               name="todo_checkbox"
                                {% if todo.todo_complete == True %}
                                       checked
                                {% endif %}
