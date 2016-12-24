@@ -20,6 +20,8 @@ def index():
         db.session.add(todo)
         db.session.commit()
 
+        return redirect(request.referrer)
+
     url_rule = request.url_rule.rule
 
     if url_rule == '/':
@@ -44,7 +46,7 @@ def done():
 
     db.session.commit()
 
-    return redirect(url_for('index'), code=304)
+    return redirect(request.referrer, code=304)
 
 
 @app.route('/not_done', methods=['POST'])

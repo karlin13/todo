@@ -39,46 +39,59 @@
                 </div>
 
             </div>
-            <div class="ui section divider"></div>
+            <div class="ui fitted divider"></div>
 
             {% for todo in todos %}
 
                 <div id="todo_segment" onmouseover="remove_todo_visible(this)" onmouseout="remove_todo_invisible(this)">
 
-                    <div class="ui toggle checkbox">
+                <div  iv class="ui grid">
 
-                        <input type="checkbox"
-                               name="todo_checkbox"
-                               {% if todo.todo_complete == True %}
+                    <div class="fourteen wide column">
+
+                        <div class="ui toggle checkbox">
+
+                            <input type="checkbox"
+                                   name="todo_checkbox"
+                                    {% if todo.todo_complete == True %}
                                       checked
-                               {% endif %}
+                                    {% endif %}
 
-                               onclick={% if todo.todo_complete == True %}
+                                    onclick={% if todo.todo_complete == True %}
                                         "sendPost('{{ request.url }}', '{{ url_for('not_done') }}', {{ todo.id }})"
-                               {% else %}
+                                    {% else %}
                                         "sendPost('{{ request.url }}', '{{ url_for('done') }}', {{ todo.id }})"
-                               {% endif %}>
+                                    {% endif %}>
 
-                        <label id="todo_text" class="{% if todo.todo_complete == True %}
+                            <label id="todo_text" class="{% if todo.todo_complete == True %}
                                         todo_complete
                                       {% else %}
                                         todo_active
                                       {% endif %}">
-                            {{ todo.todo }}
-                        </label>
+                                {{ todo.todo }}
+                            </label>
+
+                        </div>
 
                     </div>
 
-                    <a id="remove_todo" class="ui icon button" onclick="sendPost('{{ request.url }}', '{{ url_for('remove') }}', {{ todo.id }})"><i class="remove icon"></i></a>
+                    <div class="one wide column">
+                        <a id="remove_todo" class="ui icon button" onclick="sendPost('{{ request.url }}', '{{ url_for('remove') }}', {{ todo.id }})"><i class="remove icon"></i></a>
+                    </div>
 
-                    <div class="ui section divider"></div>
+                </div>
+
+                    <div class="ui fitted divider"></div>
 
                 </div>
             {% endfor %}
 
             <div id="filter">
 
-                {{ cnt_active_todo }} items left
+                <div>
+                    {{ cnt_active_todo }} items left
+                </div>
+
                 <a href="/" class="ui button">All</a>
                 <a href="/active" class="ui button">Active</a>
                 <a href="/complete" class="ui button">Complete</a>
