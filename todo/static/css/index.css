@@ -17,7 +17,6 @@ body{
 #remove_todo{
     visibility: hidden;
     background: transparent;
-    color: #0086B3;
 }
 
 .todo_complete{
