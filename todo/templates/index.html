@@ -8,7 +8,16 @@
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
     <title>Todo</title>
 </head>
-<body>
+<body onload="function a(){
+  var currentdate = new Date();
+var datetime = currentdate.getDate() + '/'
+                + (currentdate.getMonth()+1)  + '/'
+                + currentdate.getFullYear() +'@ '
+                + currentdate.getHours() + ':'
+                + currentdate.getMinutes() + ':'
+                + currentdate.getSeconds();
+            alert(datetime);
+};">
     <div id="container">
 
         <h1>TODOS</h1>
@@ -25,7 +34,8 @@
                                    {% if cnt_active_todo == 0 %}
                                     checked
                                    {% endif %}
-                                   onclick="syncAllCheckbox(this)">
+
+                                   onclick="sendPost('{{ request.url }}', '{{ url_for('all') }}', 'state='+this.checked)">
                             <label></label>
                         </div>
                     </div>
@@ -58,9 +68,9 @@
                                     {% endif %}
 
                                     onclick={% if todo.todo_complete == True %}
-                                        "sendPost('{{ request.url }}', '{{ url_for('not_done') }}', {{ todo.id }})"
+                                        "sendPost('{{ request.url }}', '{{ url_for('not_done') }}', 'todo_id='+{{ todo.id }})"
                                     {% else %}
-                                        "sendPost('{{ request.url }}', '{{ url_for('done') }}', {{ todo.id }})"
+                                        "sendPost('{{ request.url }}', '{{ url_for('done') }}', 'todo_id='+{{ todo.id }})"
                                     {% endif %}>
 
                             <label id="todo_text" class="{% if todo.todo_complete == True %}
