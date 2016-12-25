@@ -1,4 +1,4 @@
-from database import db
+from todo.database import db
 
 
 class Todos(db.Model):
