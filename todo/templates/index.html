@@ -39,15 +39,19 @@ var datetime = currentdate.getDate() + '/'
                             <label></label>
                         </div>
                     </div>
-                {% endif %}
 
-
-                <div class="twelve wide column">
+                    <div class="fourteen wide column">
+                        <form method="POST" action="{{ request.url }}" class="ui form">
+                            {{ form.input(size=100, placeholder="What needs to be done?") }}
+                        </form>
+                    </div>
+                {% else %}
+                <div class="sixteen wide column">
                     <form method="POST" action="{{ request.url }}" class="ui form">
                         {{ form.input(size=100, placeholder="What needs to be done?") }}
                     </form>
                 </div>
-
+                {% endif %}
             </div>
             <div class="ui fitted divider"></div>
 
