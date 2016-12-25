@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from todosModel import Todos
 from database import db, init_db
 from inputForm import InputForm
-
+from time import gmtime, strftime
 
 app = Flask(__name__)
 
@@ -56,6 +56,23 @@ def not_done():
     todo = Todos.query.filter_by(id=todo_id).first()
 
     todo.todo_complete = False
+
+    db.session.commit()
+
+    return redirect(request.referrer, code=304)
+
+
+#명료한 이름을 생각 못하겠음
+@app.route('/all', methods=['POST'])
+def all():
+
+    state = (request.form.get('state') == 'true')
+    opposite_state = not state
+
+    opposite = Todos.query.filter_by(todo_complete=opposite_state).all()
+
+    for todo in opposite:
+        todo.todo_complete = state
 
     db.session.commit()
 
