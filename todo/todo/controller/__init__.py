@@ -1,2 +1,2 @@
-from todo.controller import index
+from todo.controller import basic
 from todo.controller import forms
