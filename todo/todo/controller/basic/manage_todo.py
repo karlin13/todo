@@ -1,8 +1,20 @@
 from todo import todo
 from todo.model.Todos import Todos
 from todo.database import db
+from todo.controller.forms.add_todo import AddTodo
 from flask import request, redirect
 
+
+@todo.route('/add_todo', methods=['POST'])
+def add_todo():
+    form = AddTodo(request.form)
+
+    if form.validate():
+        new_todo = Todos(todo=form.input.data, todo_complete=False)
+        db.session.add(new_todo)
+        db.session.commit()
+
+    return redirect(request.referrer)
 
 @todo.route('/done', methods=['POST'])
 def done():
@@ -74,7 +86,6 @@ def remove_completed():
     for completed_todo in completed_todos:
         db.session.delete(completed_todo)
 
-    db.session.commit()
     db.session.commit()
 
     return redirect(request.referrer, code=304)

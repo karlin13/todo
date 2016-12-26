@@ -5,18 +5,11 @@ from todo.database import db
 from flask import render_template, redirect, request
 
 
-@todo.route('/', methods=['GET', 'POST'])
-@todo.route('/active', methods=['GET', 'POST'])
-@todo.route('/complete', methods=['GET', 'POST'])
+@todo.route('/')
+@todo.route('/active')
+@todo.route('/complete')
 def index():
     form = AddTodo(request.form)
-
-    if request.method == 'POST' and form.validate():
-        new_todo = Todos(todo=form.input.data, todo_complete=False)
-        db.session.add(new_todo)
-        db.session.commit()
-
-        return redirect(request.referrer)
 
     url_rule = request.url_rule.rule
 

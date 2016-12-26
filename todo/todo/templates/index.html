@@ -41,13 +41,13 @@ var datetime = currentdate.getDate() + '/'
                     </div>
 
                     <div class="fourteen wide column">
-                        <form method="POST" action="{{ request.url }}" class="ui form">
+                        <form method="POST" action="{{ url_for('add_todo') }}" class="ui form">
                             {{ form.input(size=100, placeholder="What needs to be done?") }}
                         </form>
                     </div>
                 {% else %}
                 <div class="sixteen wide column">
-                    <form method="POST" action="{{ request.url }}" class="ui form">
+                    <form method="POST" action="{{ url_for('add_todo') }}" class="ui form">
                         {{ form.input(size=100, placeholder="What needs to be done?") }}
                     </form>
                 </div>
